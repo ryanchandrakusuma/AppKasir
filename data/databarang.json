@@ -1,0 +1,12 @@
+{
+  "barang": [
+    {
+      "nama_barang": "tes",
+      "kategori": "minuman",
+      "type": "renteng",
+      "harga": "5000",
+      "stock": "10",
+      "id": 1
+    }
+  ]
+}
