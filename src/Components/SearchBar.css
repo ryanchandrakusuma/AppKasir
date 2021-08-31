@@ -1,7 +1,9 @@
-.search-bar
+.field input
 {
     width:"20rem";
     background:"#F2F1F9";
-    border:"none";
-    padding:"0.5rem";
+    border:"1px"; 
+    padding:"0.5rem"; 
+    border-style:"solid";
+    margin:"1rem"
 }

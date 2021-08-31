@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { useTable, useGlobalFilter, useSortBy, usePagination } from 'react-table';
+import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } from 'react-table';
 import MOCK_DATA from './MOCK_DATA.json';
 import { COLUMNS, GROUPED_COLUMNS } from './columns';
 import './table.css';
 import { GlobalFilter } from './GlobalFilter';
+import { Checkbox } from './Checkbox';
 
 export const PaginationTable = () => {
 
@@ -11,11 +12,21 @@ export const PaginationTable = () => {
     // const columns = useMemo (() => COLUMNS, [])
     const data = useMemo (() => MOCK_DATA, [])
 
-    const tableInstance = useTable({
-        columns,
-        data,
-        initialState: { pageIndex : 0 }
-    }, useGlobalFilter, useSortBy, usePagination)
+    // const tableInstance = useTable({
+    //     columns,
+    //     data,
+    // }, useGlobalFilter, useSortBy, usePagination, useRowSelect, hooks => {
+    //     hooks.visibleColumns.push(columns => [
+    //       {
+    //         id: 'selection',
+    //         Header: ({ getToggleAllRowsSelectedProps }) => (
+    //           <Checkbox {...getToggleAllRowsSelectedProps()} />
+    //         ),
+    //         Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+    //       },
+    //       ...columns
+    //     ])
+    //   })})
 
     const {
         getTableProps,
@@ -31,9 +42,26 @@ export const PaginationTable = () => {
         pageCount,
         setPageSize,
         prepareRow,
+        selectedFlatRows,
         state,
         setGlobalFilter
-    } = tableInstance
+    } = useTable(
+        {
+            columns,
+            data
+        }, useGlobalFilter, useSortBy, usePagination, useRowSelect, hooks => {
+            hooks.visibleColumns.push(columns => [
+              {
+                id: 'selection',
+                Header: ({ getToggleAllRowsSelectedProps }) => (
+                  <Checkbox {...getToggleAllRowsSelectedProps()} />
+                ),
+                Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+              },
+              ...columns
+            ])
+          }
+    )
 
     const { globalFilter } = state
     const { pageIndex, pageSize } = state
@@ -75,6 +103,7 @@ export const PaginationTable = () => {
                 } 
             </tbody>
         </table>
+        
         <div>
             <span>
                 Page{' '}
@@ -109,6 +138,17 @@ export const PaginationTable = () => {
             </button>
             <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
         </div>
+        <pre>
+        <code>
+          {JSON.stringify(
+            {
+              selectedFlatRows: selectedFlatRows.map(row => row.original)
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
         </>
     )
 }

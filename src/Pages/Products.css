@@ -1,0 +1,9 @@
+.wrapper
+{
+    display:flex;
+}
+
+.left-content
+{
+    margin-left:2rem;
+}
