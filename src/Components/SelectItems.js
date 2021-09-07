@@ -1,9 +1,19 @@
 import React from 'react';
 
-const SelectItems = ({input:nama, input2:jumlah, input3:satuan}) => {
-  
+const SelectItems = ({barangList=[]}) => {
   return (
-    <p>{nama} {jumlah} {satuan}</p>
+    <>
+    { barangList.map((data,index) => {
+        if (data) {
+          return (
+            <div key={data.namaBarang}>
+              <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}</p>
+	          </div>	
+    	   )	
+    	 }
+    	 return null
+    }) }
+    </>
   );
 }
 

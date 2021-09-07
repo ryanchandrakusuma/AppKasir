@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Checkout.css';
 import SelectItems from '../Components/SelectItems';
 import Popup from '../Components/Popup';
 
 function Checkout() {
-  // const [input, setInput] = useState("");
   const [buttonPopup, setButtonPopup] = useState(false);
   const [passValue, setValue] = useState('');
-  const [namaBarang, setNamaBarang] = useState('');
-  const [jumlahBarang, setJumlahBarang] = useState('');
-  const [satuanBarang, setSatuanBarang] = useState('');
+  const [barangList, setBarangList] = useState();
+
+  const fetchData = async () => {
+    return await fetch('http://localhost:8000/checkout')
+      .then(response => response.json())
+      .then(data => {
+        setBarangList(data) 
+      });}
+
+  useEffect( () => {fetchData()},[]);
 
   function openPopup(value) {
     setValue(value);
@@ -25,19 +31,13 @@ function Checkout() {
             <button value="Barang4" onClick={(e) => openPopup(e.target.value)}>Barang4</button>
         </div>
         <div className="result">
-            <SelectItems 
-              input={namaBarang} 
-              input2={jumlahBarang} 
-              input3={satuanBarang}>
-            </SelectItems>
+          <SelectItems barangList={barangList}/>
         </div>
         <Popup 
           trigger={buttonPopup} 
           setTrigger={setButtonPopup} 
-          value={passValue} 
-          inputBarang={setNamaBarang} 
-          inputJumlah={setJumlahBarang} 
-          inputSatuan={setSatuanBarang}>
+          tempName={passValue}
+          >
         </Popup>
     </div>
   );

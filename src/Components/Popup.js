@@ -4,7 +4,7 @@ import useFetch from '../Components/useFetch';
 import { useHistory } from 'react-router';
 
 const Popup = (props) => {
-    const [namaBarang, setNamaBarang] = useState('');
+    let namaBarang;
     const [jumlahBarang, setJumlahBarang] = useState('');
     const [satuanBarang, setSatuanBarang] = useState('buah');
     const [isPending, setIsPending] = useState('false');
@@ -13,7 +13,7 @@ const Popup = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.setTrigger(false);
-        setNamaBarang(props.value);
+        namaBarang = props.tempName;
         // props.inputJumlah(jumlahBarang);
         // props.inputSatuan(satuanBarang);
 
@@ -37,7 +37,7 @@ const Popup = (props) => {
             <div className={"popup-inner"}>
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>X</button>
                 <form onSubmit={handleSubmit}>
-                    Barang : <input type="text" disabled value={props.value}></input><br></br>
+                    Barang : <input type="text" disabled value={props.tempName}></input><br></br>
                     Jumlah : <input type="number" required value={jumlahBarang} onChange={(e) => setJumlahBarang(e.target.value)}></input><br></br>
                     Satuan : <select value={satuanBarang} onChange={(e) => setSatuanBarang(e.target.value)}>
                         <option value="buah">buah</option>
