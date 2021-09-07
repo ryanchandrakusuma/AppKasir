@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Popup.css'
-import useFetch from '../useFetch';
+import useFetch from '../Components/useFetch';
 
 const Popup = (props) => {
     const [namaBarang, setNamaBarang] = useState('');
