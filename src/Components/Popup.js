@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Popup.css'
 import useFetch from '../Components/useFetch';
+import { useHistory } from 'react-router';
 
 const Popup = (props) => {
     const [namaBarang, setNamaBarang] = useState('');
