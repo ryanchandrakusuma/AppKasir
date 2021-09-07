@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
 import './Popup.css'
+import useFetch from '../useFetch';
 
 const Popup = (props) => {
+    const [namaBarang, setNamaBarang] = useState('');
     const [jumlahBarang, setJumlahBarang] = useState('');
     const [satuanBarang, setSatuanBarang] = useState('buah');
+    const [isPending, setIsPending] = useState('false');
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         props.setTrigger(false);
-        props.inputBarang(props.value);
-        props.inputJumlah(jumlahBarang);
-        props.inputSatuan(satuanBarang);
+        setNamaBarang(props.value);
+        // props.inputJumlah(jumlahBarang);
+        // props.inputSatuan(satuanBarang);
+
+        const barang = {namaBarang, jumlahBarang, satuanBarang}
+        setIsPending(true);
+        fetch('http://localhost:8000/checkout',{
+            method: 'POST',
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(barang)
+        }).then(()=>{
+            console.log('Tambah berhasil');
+            setIsPending('false');
+            history.push('/');
+        })
     }
+    const {data} = useFetch('http://localhost:8000/checkout')
 
 
     return(props.trigger) ? (
@@ -26,7 +43,8 @@ const Popup = (props) => {
                         <option value="kg">kg</option>
                         <option value="porsi">porsi</option>
                     </select><br></br>
-                    <button type="submit">Submit</button>
+                    {!isPending && <button>Submitting..</button>}
+                    {isPending && <button>Submit</button>}
                 </form>
             </div>
         </div>
