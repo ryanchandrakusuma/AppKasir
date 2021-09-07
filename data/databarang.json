@@ -1,0 +1,10 @@
+{
+  "checkout": [
+    {
+      "namaBarang": "",
+      "jumlahBarang": "2",
+      "satuanBarang": "buah",
+      "id": 1
+    }
+  ]
+}
