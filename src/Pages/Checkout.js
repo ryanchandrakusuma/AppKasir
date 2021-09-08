@@ -51,6 +51,8 @@ function Checkout() {
         </div>
         <div className="result">
           <SelectItems barangList={barangList}/>
+          <br></br>
+          <button>Checkout</button>
         </div>
         <Popup 
           trigger={buttonPopup} 

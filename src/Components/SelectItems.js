@@ -1,18 +1,24 @@
 import React from 'react';
 
 const SelectItems = ({barangList=[]}) => {
+  let totalHarga = 0;
   return (
     <>
     { barangList.map((data,index) => {
         if (data) {
+          totalHarga += data.hargaBarang;
           return (
             <div key={data.namaBarang}>
-              <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}, Total : {data.hargaBarang}</p>
+              <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}, Harga : {data.hargaBarang}</p>
 	          </div>	
-    	   )	
-    	 }
-    	 return null
+    	    )	
+    	  }
+    	  return null
     }) }
+    <br></br>
+    <div>
+      <p>Total Harga: {totalHarga}</p>
+	  </div>	
     </>
   );
 }

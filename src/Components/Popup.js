@@ -12,7 +12,6 @@ const Popup = (props) => {
     const history = useHistory();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         props.setTrigger(false);
         namaBarang = props.tempName.namaBarang;
         hargaBarang = props.tempName.hargaBarang * jumlahBarang;
@@ -28,7 +27,7 @@ const Popup = (props) => {
         }).then(()=>{
             console.log('Tambah berhasil');
             setIsPending('false');
-            history.push('/');
+            window.location.reload();
         })
     }
     const {data} = useFetch('http://localhost:8000/checkout')
