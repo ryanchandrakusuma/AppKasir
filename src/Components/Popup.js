@@ -5,7 +5,8 @@ import { useHistory } from 'react-router';
 
 const Popup = (props) => {
     let namaBarang;
-    const [jumlahBarang, setJumlahBarang] = useState('');
+    let hargaBarang;
+    const [jumlahBarang, setJumlahBarang] = useState();
     const [satuanBarang, setSatuanBarang] = useState('buah');
     const [isPending, setIsPending] = useState('false');
     const history = useHistory();
@@ -13,11 +14,12 @@ const Popup = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.setTrigger(false);
-        namaBarang = props.tempName;
+        namaBarang = props.tempName.namaBarang;
+        hargaBarang = props.tempName.hargaBarang * jumlahBarang;
         // props.inputJumlah(jumlahBarang);
         // props.inputSatuan(satuanBarang);
 
-        const barang = {namaBarang, jumlahBarang, satuanBarang}
+        const barang = {namaBarang, jumlahBarang, satuanBarang, hargaBarang}
         setIsPending(true);
         fetch('http://localhost:8000/checkout',{
             method: 'POST',
@@ -37,7 +39,7 @@ const Popup = (props) => {
             <div className={"popup-inner"}>
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>X</button>
                 <form onSubmit={handleSubmit}>
-                    Barang : <input type="text" disabled value={props.tempName}></input><br></br>
+                    Barang : <input type="text" disabled value={props.tempName.namaBarang}></input><br></br>
                     Jumlah : <input type="number" required value={jumlahBarang} onChange={(e) => setJumlahBarang(e.target.value)}></input><br></br>
                     Satuan : <select value={satuanBarang} onChange={(e) => setSatuanBarang(e.target.value)}>
                         <option value="buah">buah</option>

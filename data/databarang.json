@@ -1,22 +1,18 @@
 {
   "checkout": [
     {
-      "namaBarang": "Barang2",
-      "jumlahBarang": "2",
+      "namaBarang": "Barang1",
+      "jumlahBarang": "1",
       "satuanBarang": "buah",
+      "hargaBarang": 6000,
       "id": 1
     },
     {
       "namaBarang": "Barang2",
       "jumlahBarang": "2",
       "satuanBarang": "buah",
+      "hargaBarang": 14000,
       "id": 2
-    },
-    {
-      "namaBarang": "Barang1",
-      "jumlahBarang": "3",
-      "satuanBarang": "buah",
-      "id": 3
     }
   ]
 }

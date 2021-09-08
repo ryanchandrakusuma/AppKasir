@@ -7,7 +7,7 @@ const SelectItems = ({barangList=[]}) => {
         if (data) {
           return (
             <div key={data.namaBarang}>
-              <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}</p>
+              <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}, Total : {data.hargaBarang}</p>
 	          </div>	
     	   )	
     	 }
