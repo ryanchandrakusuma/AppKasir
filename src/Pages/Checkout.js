@@ -4,53 +4,56 @@ import SelectItems from '../Components/SelectItems';
 import Popup from '../Components/Popup';
 
 function Checkout() {
+  let counter = -1;
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [passValue, setValue] = useState('');
-  const [barangList, setBarangList] = useState();
-
-  const BarangLists = [
-    {
-      namaBarang: "Barang1",
-      hargaBarang: 6000,
-    },
-    {
-      namaBarang: "Barang2",
-      hargaBarang: 7000,
-    },
-    {
-      namaBarang: "Barang3",
-      hargaBarang: 8000,
-    },
-    {
-      namaBarang: "Barang4",
-      hargaBarang: 10000,
-    },
-  ]
+  const [passValue, setValue] = useState();
+  const [barangList, setBarangList] = useState([]);
+  const [checkoutList, setCheckoutList] = useState([]);
 
   const fetchData = async () => {
     return await fetch('http://localhost:8000/checkout')
       .then(response => response.json())
       .then(data => {
+        setCheckoutList(data) 
+      });
+  }
+
+  const fetchData2 = async () => {
+    return await fetch('http://localhost:8001/barangs')
+      .then(response => response.json())
+      .then(data => {
         setBarangList(data) 
-      });}
+      });
+  }
 
   useEffect( () => {fetchData()},[]);
+  useEffect( () => {fetchData2()},[]);
 
   function openPopup(value) {
-    setValue(BarangLists.at(value));
+    console.log(value);
+    setValue(barangList.at(value));
     setButtonPopup(true);
   }
 
   return (
     <div className="container">
         <div className="selection">
-            <button value="0" onClick={(e) => openPopup(e.target.value)}>Barang1</button><br></br>
-            <button value="1" onClick={(e) => openPopup(e.target.value)}>Barang2</button><br></br>
-            <button value="2" onClick={(e) => openPopup(e.target.value)}>Barang3</button><br></br>
-            <button value="3" onClick={(e) => openPopup(e.target.value)}>Barang4</button>
+          <>
+            { barangList.map((data,index) => {
+                if (data) {
+                  counter++;
+                  return (
+                    <div key={data.id}>
+                      <button value={counter} onClick={(e) => openPopup(e.target.value)}>{data.namaBarang}</button><br></br>
+                    </div>	
+                  )
+                }
+                return null
+            }) }
+          </>
         </div>
         <div className="result">
-          <SelectItems barangList={barangList}/>
+          <SelectItems barangList={checkoutList}/>
           <br></br>
           <button>Checkout</button>
         </div>
@@ -58,8 +61,7 @@ function Checkout() {
           trigger={buttonPopup} 
           setTrigger={setButtonPopup} 
           tempName={passValue}
-          >
-        </Popup>
+        />
     </div>
   );
 }

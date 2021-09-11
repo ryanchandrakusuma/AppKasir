@@ -1,0 +1,29 @@
+{
+  "barangs": [
+    {
+      "namaBarang": "Barang1",
+      "hargaBarang": 6000,
+      "id": 1
+    },
+    {
+      "namaBarang": "Barang2",
+      "hargaBarang": 7000,
+      "id": 2
+    },
+    {
+      "namaBarang": "Barang3",
+      "hargaBarang": 8000,
+      "id": 3
+    },
+    {
+      "namaBarang": "Barang4",
+      "hargaBarang": 10000,
+      "id": 4
+    },
+    {
+      "namaBarang": "Barang5",
+      "hargaBarang": 15000,
+      "id": 5
+    }
+  ]
+}

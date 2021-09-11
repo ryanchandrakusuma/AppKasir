@@ -8,7 +8,7 @@ const SelectItems = ({barangList=[]}) => {
         if (data) {
           totalHarga += data.hargaBarang;
           return (
-            <div key={data.namaBarang}>
+            <div key={data.id}>
               <p>{data.namaBarang} {data.jumlahBarang} {data.satuanBarang}, Harga : {data.hargaBarang}</p>
 	          </div>	
     	    )	

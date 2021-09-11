@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import './Popup.css'
 import useFetch from '../Components/useFetch';
-import { useHistory } from 'react-router';
 
 const Popup = (props) => {
     let namaBarang;
     let hargaBarang;
-    const [jumlahBarang, setJumlahBarang] = useState();
+    const [jumlahBarang, setJumlahBarang] = useState(1);
     const [satuanBarang, setSatuanBarang] = useState('buah');
     const [isPending, setIsPending] = useState('false');
-    const history = useHistory();
 
     const handleSubmit = (e) => {
         props.setTrigger(false);
         namaBarang = props.tempName.namaBarang;
         hargaBarang = props.tempName.hargaBarang * jumlahBarang;
-        // props.inputJumlah(jumlahBarang);
-        // props.inputSatuan(satuanBarang);
 
         const barang = {namaBarang, jumlahBarang, satuanBarang, hargaBarang}
         setIsPending(true);
