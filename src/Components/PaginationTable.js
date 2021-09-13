@@ -1,32 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } from 'react-table';
-import MOCK_DATA from './MOCK_DATA.json';
-import { COLUMNS, GROUPED_COLUMNS } from './columns';
+import { COLUMNS } from './columns';
 import './table.css';
 import { GlobalFilter } from './GlobalFilter';
 import { Checkbox } from './Checkbox';
 
 export const PaginationTable = () => {
 
-    const columns = useMemo (() => GROUPED_COLUMNS, [])
-    // const columns = useMemo (() => COLUMNS, [])
-    const data = useMemo (() => MOCK_DATA, [])
-
-    // const tableInstance = useTable({
-    //     columns,
-    //     data,
-    // }, useGlobalFilter, useSortBy, usePagination, useRowSelect, hooks => {
-    //     hooks.visibleColumns.push(columns => [
-    //       {
-    //         id: 'selection',
-    //         Header: ({ getToggleAllRowsSelectedProps }) => (
-    //           <Checkbox {...getToggleAllRowsSelectedProps()} />
-    //         ),
-    //         Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
-    //       },
-    //       ...columns
-    //     ])
-    //   })})
+    const columns = useMemo (() => COLUMNS, [])
+    const [checkoutList, setCheckoutList] = useState([]);
+    const fetchData = async () => {
+        return await fetch('http://localhost:8001/barangs')
+          .then(console.log("loading"))
+          .then(response => response.json())
+          .then(console.log("got the data!"))
+          .then(data => {
+            setCheckoutList(data) 
+          });
+      }
+      
+    useEffect( () => {fetchData()},[]);
+    const data = checkoutList
 
     const {
         getTableProps,
@@ -68,7 +62,14 @@ export const PaginationTable = () => {
 
     return (
         <>
+
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
+        <span>
+                Page{' '}
+                <strong>
+                    { pageIndex + 1 } of {pageOptions.length}
+                </strong>
+            </span>
         <table {...getTableProps()}>
             <thead>
                 {headerGroups.map((headerGroup) => (
@@ -94,8 +95,10 @@ export const PaginationTable = () => {
                             <tr {...row.getRowProps()}>
                                 {
                                     row.cells.map((cell) => {
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        return <td onClick ={() => console.info(row.values.namaBarang)}
+                                        {...cell.getCellProps()} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                     })
+                                    
                                 }
                             </tr>
                         )

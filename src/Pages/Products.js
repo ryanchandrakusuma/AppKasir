@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilteringTable } from '../Components/FilteringTable';
+import Checkout from '../Components/Checkout';
 import { PaginationTable } from '../Components/PaginationTable';
 import './Products.css';
 
@@ -7,12 +7,16 @@ const Products = () => {
 
   return (
     <div className = "wrapper">
-      <div className = "left-content" >
+      <div className = "left">
         <div className = "top-filter"></div>
         <PaginationTable />
       </div>
-      <div className = "right-content">
-        <input type = 'number'></input>
+      <div className = "right">
+        <div className = "right-wrapper">
+          <div className= "right-content">
+          <Checkout />  
+          </div>
+        </div>
       </div>
         
     </div>

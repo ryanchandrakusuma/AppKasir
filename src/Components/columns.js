@@ -5,37 +5,17 @@ export const COLUMNS =
     {
         Header: 'Id',
         Footer: 'Id',
-        accessor : 'id'
+        accessor : 'id',
     },
     {
-        Header: 'First Name',
-        Footer: 'First Name',
-        accessor: 'first_name'
+        Header: 'Nama',
+        Footer: 'Nama',
+        accessor: 'namaBarang'
     },
     {
-        Header: 'Last Name',
-        Footer: 'Last Name',
-        accessor: 'last_name'
-    },
-    {
-        Header: 'Date of Birth',
-        Footer: 'Date of Birth',
-        accessor: 'dateofbirth'
-    },
-    {
-        Header: 'Email Address',
-        Footer: 'Email Address',
-        accessor: 'email'
-    },
-    {
-        Header: 'Gender',
-        Footer: 'Gender',
-        accessor: 'gender'
-    },
-    {
-        Header: 'IP Address',
-        Footer: 'IP Address',
-        accessor: 'ip_address'
+        Header: 'Harga',
+        Footer: 'Harga',
+        accessor: 'hargaBarang'
     }
 ]
 

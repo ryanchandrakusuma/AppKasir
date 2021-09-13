@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Popup.css'
-import useFetch from '../Components/useFetch';
 
 const Popup = (props) => {
     let namaBarang;
@@ -26,7 +25,7 @@ const Popup = (props) => {
             window.location.reload();
         })
     }
-    const {data} = useFetch('http://localhost:8000/checkout')
+    // const {data} = useFetch('http://localhost:8000/checkout')
 
 
     return(props.trigger) ? (
