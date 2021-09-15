@@ -29,39 +29,14 @@ function Checkout() {
   useEffect( () => {fetchData()},[]);
   useEffect( () => {fetchData2()},[]);
 
-  function openPopup(value) {
-    console.log(value);
-    setValue(barangList.at(value));
-    setButtonPopup(true);
-  }
-
   return (
     <div className="container">
-        <div className="selection">
-          <>
-            { barangList.map((data,index) => {
-                if (data) {
-                  counter++;
-                  return (
-                    <div key={data.id}>
-                      <button value={counter} onClick={(e) => openPopup(e.target.value)}>{data.namaBarang}</button><br></br>
-                    </div>	
-                  )
-                }
-                return null
-            }) }
-          </>
-        </div>
+        
         <div className="result">
           <SelectItems barangList={checkoutList}/>
           <br></br>
           <button>Checkout</button>
         </div>
-        <Popup 
-          trigger={buttonPopup} 
-          setTrigger={setButtonPopup} 
-          tempName={passValue}
-        />
     </div>
   );
 }

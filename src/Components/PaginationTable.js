@@ -3,12 +3,15 @@ import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } fro
 import { COLUMNS } from './columns';
 import './table.css';
 import { GlobalFilter } from './GlobalFilter';
-import { Checkbox } from './Checkbox';
+import Popup from './Popup';
 
 export const PaginationTable = () => {
 
     const columns = useMemo (() => COLUMNS, [])
+    const [buttonPopup, setButtonPopup] = useState(false);
     const [checkoutList, setCheckoutList] = useState([]);
+    const [passValue, setValue] = useState();
+
     const fetchData = async () => {
         return await fetch('http://localhost:8001/barangs')
           .then(console.log("loading"))
@@ -43,26 +46,25 @@ export const PaginationTable = () => {
         {
             columns,
             data
-        }, useGlobalFilter, useSortBy, usePagination, useRowSelect, hooks => {
-            hooks.visibleColumns.push(columns => [
-              {
-                id: 'selection',
-                Header: ({ getToggleAllRowsSelectedProps }) => (
-                  <Checkbox {...getToggleAllRowsSelectedProps()} />
-                ),
-                Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
-              },
-              ...columns
-            ])
-          }
+        }, useGlobalFilter, useSortBy, usePagination, useRowSelect
     )
 
     const { globalFilter } = state
     const { pageIndex, pageSize } = state
 
+    function openPopup(value) {
+        console.log(value);
+        setValue(value);
+        setButtonPopup(true);
+    }
+
     return (
         <>
-
+        <Popup 
+          trigger={buttonPopup} 
+          setTrigger={setButtonPopup} 
+          tempName={passValue}
+        />
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
         <span>
                 Page{' '}
@@ -95,10 +97,9 @@ export const PaginationTable = () => {
                             <tr {...row.getRowProps()}>
                                 {
                                     row.cells.map((cell) => {
-                                        return <td onClick ={() => console.info(row.values.namaBarang)}
+                                        return <td onClick ={() => openPopup(row.values)}
                                         {...cell.getCellProps()} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                     })
-                                    
                                 }
                             </tr>
                         )
@@ -142,15 +143,6 @@ export const PaginationTable = () => {
             <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>{'>>'}</button>
         </div>
         <pre>
-        <code>
-          {JSON.stringify(
-            {
-              selectedFlatRows: selectedFlatRows.map(row => row.original)
-            },
-            null,
-            2
-          )}
-        </code>
       </pre>
         </>
     )

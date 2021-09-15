@@ -14,7 +14,7 @@ const Products = () => {
       <div className = "right">
         <div className = "right-wrapper">
           <div className= "right-content">
-          <Checkout />  
+          <Checkout/>  
           </div>
         </div>
       </div>
