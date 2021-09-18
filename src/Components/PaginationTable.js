@@ -6,11 +6,15 @@ import { GlobalFilter } from './GlobalFilter';
 import Popup from './Popup';
 
 export const PaginationTable = () => {
-
-    const columns = useMemo (() => COLUMNS, [])
+    let namaBarang;
+    let hargaBarang;
+    const [isPending, setIsPending] = useState('false');
+    const [jumlahBarang, setJumlahBarang] = useState(1);
+    const [satuanBarang, setSatuanBarang] = useState('buah');
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [checkoutList, setCheckoutList] = useState([]);
-    const [passValue, setValue] = useState();
+    const [barangList, setBarangList] = useState([]);
+    const [passValue, setValue] = useState([]);
+    const columns = useMemo (() => COLUMNS, [])
 
     const fetchData = async () => {
         return await fetch('http://localhost:8001/barangs')
@@ -18,12 +22,30 @@ export const PaginationTable = () => {
           .then(response => response.json())
           .then(console.log("got the data!"))
           .then(data => {
-            setCheckoutList(data) 
+            setBarangList(data) 
           });
-      }
+    }
+
+    const handleSubmitInsert = (e) => {
+        setButtonPopup(false);
+        namaBarang = passValue.namaBarang;
+        hargaBarang = passValue.hargaBarang * jumlahBarang;
+
+        const barang = {namaBarang, jumlahBarang, satuanBarang, hargaBarang}
+        setIsPending(true);
+        fetch('http://localhost:8000/checkout',{
+            method: 'POST',
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(barang)
+        }).then(()=>{
+            console.log('Tambah berhasil');
+            setIsPending('false');
+            window.location.reload();
+        })
+    }
       
     useEffect( () => {fetchData()},[]);
-    const data = checkoutList
+    const data = barangList
 
     const {
         getTableProps,
@@ -39,7 +61,6 @@ export const PaginationTable = () => {
         pageCount,
         setPageSize,
         prepareRow,
-        selectedFlatRows,
         state,
         setGlobalFilter
     } = useTable(
@@ -52,7 +73,7 @@ export const PaginationTable = () => {
     const { globalFilter } = state
     const { pageIndex, pageSize } = state
 
-    function openPopup(value) {
+    function openPopupInsert(value) {
         console.log(value);
         setValue(value);
         setButtonPopup(true);
@@ -60,11 +81,20 @@ export const PaginationTable = () => {
 
     return (
         <>
-        <Popup 
-          trigger={buttonPopup} 
-          setTrigger={setButtonPopup} 
-          tempName={passValue}
-        />
+        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <form onSubmit={handleSubmitInsert}>
+                Barang : <input type="text" disabled value={passValue.namaBarang}></input><br></br>
+                Jumlah : <input type="number" required value={jumlahBarang} onChange={(e) => setJumlahBarang(e.target.value)}></input><br></br>
+                Satuan : <select value={satuanBarang} onChange={(e) => setSatuanBarang(e.target.value)}>
+                            <option value="buah">buah</option>
+                            <option value="kg">kg</option>
+                            <option value="porsi">porsi</option>
+                         </select><br></br>
+            {!isPending && <button>Submitting..</button>}
+            {isPending && <button>Submit</button>}
+            </form>
+        </Popup>
+
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
         <span>
                 Page{' '}
@@ -97,7 +127,7 @@ export const PaginationTable = () => {
                             <tr {...row.getRowProps()}>
                                 {
                                     row.cells.map((cell) => {
-                                        return <td onClick ={() => openPopup(row.values)}
+                                        return <td onClick ={() => openPopupInsert(row.values)}
                                         {...cell.getCellProps()} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                                     })
                                 }

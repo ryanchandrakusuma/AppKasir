@@ -19,6 +19,31 @@ export const COLUMNS =
     }
 ]
 
+export const CHECKCOLUMNS = 
+[
+    {
+        Header: 'Keranjang',
+        Footer: 'Keranjang',
+        columns: [
+            {
+                accessor: 'id'
+            },
+            {
+                accessor: 'namaBarang'
+            },
+            {
+                accessor: 'jumlahBarang'
+            },
+            {
+                accessor: 'satuanBarang'
+            },
+            {
+                accessor: 'hargaBarang'
+            }
+        ]
+    }
+]
+
 export const GROUPED_COLUMNS = [
     {
         Header: 'Id',

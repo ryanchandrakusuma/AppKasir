@@ -1,46 +1,46 @@
 {
   "checkout": [
     {
-      "namaBarang": "Barang1",
-      "jumlahBarang": "2",
+      "namaBarang": "Barang4",
+      "jumlahBarang": 1,
       "satuanBarang": "buah",
-      "hargaBarang": 12000,
-      "id": 1
-    },
-    {
-      "namaBarang": "Barang2",
-      "jumlahBarang": "2",
-      "satuanBarang": "buah",
-      "hargaBarang": 14000,
-      "id": 2
+      "hargaBarang": 10000,
+      "id": 6
     },
     {
       "namaBarang": "Barang3",
-      "jumlahBarang": "3",
+      "jumlahBarang": 1,
       "satuanBarang": "buah",
-      "hargaBarang": 24000,
-      "id": 3
+      "hargaBarang": 8000,
+      "id": 7
+    },
+    {
+      "namaBarang": "Barang3",
+      "jumlahBarang": 1,
+      "satuanBarang": "buah",
+      "hargaBarang": 8000,
+      "id": 8
+    },
+    {
+      "namaBarang": "Barang1",
+      "jumlahBarang": 1,
+      "satuanBarang": "buah",
+      "hargaBarang": 6000,
+      "id": 9
     },
     {
       "namaBarang": "Barang2",
-      "jumlahBarang": "4",
+      "jumlahBarang": 1,
       "satuanBarang": "buah",
-      "hargaBarang": 28000,
-      "id": 4
-    },
-    {
-      "namaBarang": "Barang4",
-      "jumlahBarang": "1",
-      "satuanBarang": "buah",
-      "hargaBarang": 10000,
-      "id": 5
+      "hargaBarang": 7000,
+      "id": 10
     },
     {
       "namaBarang": "Barang5",
-      "jumlahBarang": "1",
+      "jumlahBarang": 1,
       "satuanBarang": "buah",
       "hargaBarang": 15000,
-      "id": 6
+      "id": 11
     }
   ]
 }
