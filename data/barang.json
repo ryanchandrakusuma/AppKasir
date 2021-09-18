@@ -24,6 +24,30 @@
       "namaBarang": "Barang5",
       "hargaBarang": 15000,
       "id": 5
+    },
+    {
+      "nama_barang": "Barang1",
+      "kategori": "cat",
+      "type": "tipe",
+      "harga": "10000",
+      "stock": "12",
+      "id": 6
+    },
+    {
+      "nama_barang": "120120",
+      "kategori": "210210",
+      "type": "121212",
+      "harga": "212121",
+      "stock": "123123",
+      "id": 7
+    },
+    {
+      "nama_barang": "asdasd",
+      "kategori": "asdas",
+      "type": "dsa",
+      "harga": "dsa",
+      "stock": "dsa",
+      "id": 8
     }
   ]
 }
