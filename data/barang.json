@@ -1,53 +1,20 @@
 {
   "barangs": [
     {
-      "namaBarang": "Barang1",
-      "hargaBarang": 6000,
+      "nama_barang": "cabe",
+      "kategori": "sayur",
+      "type": "kg",
+      "harga": 50000,
+      "stock": 100,
       "id": 1
     },
     {
-      "namaBarang": "Barang2",
-      "hargaBarang": 7000,
+      "nama_barang": "urea",
+      "kategori": "pupuk",
+      "type": "kg",
+      "harga": 8000,
+      "stock": 1000,
       "id": 2
-    },
-    {
-      "namaBarang": "Barang3",
-      "hargaBarang": 8000,
-      "id": 3
-    },
-    {
-      "namaBarang": "Barang4",
-      "hargaBarang": 10000,
-      "id": 4
-    },
-    {
-      "namaBarang": "Barang5",
-      "hargaBarang": 15000,
-      "id": 5
-    },
-    {
-      "nama_barang": "Barang1",
-      "kategori": "cat",
-      "type": "tipe",
-      "harga": "10000",
-      "stock": "12",
-      "id": 6
-    },
-    {
-      "nama_barang": "120120",
-      "kategori": "210210",
-      "type": "121212",
-      "harga": "212121",
-      "stock": "123123",
-      "id": 7
-    },
-    {
-      "nama_barang": "asdasd",
-      "kategori": "asdas",
-      "type": "dsa",
-      "harga": "dsa",
-      "stock": "dsa",
-      "id": 8
     }
   ]
 }
