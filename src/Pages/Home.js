@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
-=======
-import React from 'react';
->>>>>>> Stashed changes
 import Checkout from '../Components/Checkout';
 import { ListBarang } from '../Components/ListBarang';
 import './Home.css';
