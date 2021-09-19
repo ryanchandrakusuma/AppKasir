@@ -10,12 +10,27 @@ export const COLUMNS =
     {
         Header: 'Nama',
         Footer: 'Nama',
-        accessor: 'namaBarang'
+        accessor: 'nama_barang'
     },
     {
         Header: 'Harga',
         Footer: 'Harga',
-        accessor: 'hargaBarang'
+        accessor: 'harga'
+    },
+    {
+        Header: 'Kategori',
+        Footer: 'Kategori',
+        accessor: 'kategori'
+    },
+    {
+        Header: 'Satuan',
+        Footer: 'Satuan',
+        accessor: 'type'
+    },
+    {
+        Header: 'Stok',
+        Footer: 'Stok',
+        accessor: 'stock'
     }
 ]
 

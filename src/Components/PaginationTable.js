@@ -12,9 +12,30 @@ export const PaginationTable = () => {
     const [jumlahBarang, setJumlahBarang] = useState(1);
     const [satuanBarang, setSatuanBarang] = useState('buah');
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [buttonaddbarang, setaddbarang] = useState(false);
     const [barangList, setBarangList] = useState([]);
     const [passValue, setValue] = useState([]);
     const columns = useMemo (() => COLUMNS, [])
+    const [nama_barang, setNamaBarang] = useState();
+    const [stock, setStock] = useState();
+    const [harga, setHarga] = useState();
+    const [kategori, setKategori] = useState();
+    const [type, setType] = useState();
+    const handleSubmit = (e) => {
+    // e.preventDefault();
+    const barang = {nama_barang,kategori,type,harga,stock}
+    setIsPending(true);
+    fetch('http://localhost:8001/barangs',{
+      method: 'POST',
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(barang)
+    }).then(()=>{
+      console.log('barang masuk');
+      setIsPending('false');
+      // history.push('/');
+    })
+  }
+//   const {data} = useFetch('http://localhost:8001/barangs')
 
     const fetchData = async () => {
         return await fetch('http://localhost:8001/barangs')
@@ -78,14 +99,77 @@ export const PaginationTable = () => {
         setValue(value);
         setButtonPopup(true);
     }
+    function openPopupBarang(){
+        setaddbarang(true);
+    }
 
     return (
         <>
+        <button onClick = { openPopupBarang }>Tambah Barang</button>
+        <Popup trigger={buttonaddbarang} setTrigger={setaddbarang}>
+            <form onSubmit={handleSubmit}>
+            <table>
+                <tr>
+                    <td><label>Nama barang  : </label></td>
+                    <td><input type="text" required
+                            value={nama_barang}
+                            onChange={(e)=> setNamaBarang(e.target.value)}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Kategori : </label></td>
+                    <td>
+                        <input type="text"
+                            required
+                            value={kategori}
+                            onChange={(e)=> setKategori(e.target.value)}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Satuan : </label></td>
+                    <td>
+                        <input type="text"
+                            required
+                            value={type}
+                            onChange={(e)=> setType(e.target.value)}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Harga    : </label></td>
+                    <td>
+                    <input type="text"
+                        required
+                        value={harga}
+                        onChange={(e)=> setHarga(e.target.value)}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Jumlah Stok  : </label></td>
+                    <td>
+                    <input type="text"
+                        required
+                        value={stock}
+                        onChange={(e)=> setStock(e.target.value)}
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td colSpan="2" align="right"> 
+                        {!isPending && <button>Adding..</button>}
+                        {isPending && <button>Add Barang</button>}
+                    </td>
+                </tr>
+            </table>
+       
+      </form>
+        </Popup>
         <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
             <form onSubmit={handleSubmitInsert}>
-                Barang : <input type="text" disabled value={passValue.namaBarang}></input><br></br>
+                Barang : <input type="text" disabled value={passValue.nama_barang}></input><br></br>
                 Jumlah : <input type="number" required value={jumlahBarang} onChange={(e) => setJumlahBarang(e.target.value)}></input><br></br>
-                Satuan : <select value={satuanBarang} onChange={(e) => setSatuanBarang(e.target.value)}>
+                Satuan : <select value={passValue.type} onChange={(e) => setSatuanBarang(e.target.value)}>
                             <option value="buah">buah</option>
                             <option value="kg">kg</option>
                             <option value="porsi">porsi</option>
@@ -94,7 +178,7 @@ export const PaginationTable = () => {
             {isPending && <button>Submit</button>}
             </form>
         </Popup>
-
+        
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
         <span>
                 Page{' '}
