@@ -4,16 +4,16 @@
       "nama_barang": "cabe",
       "kategori": "sayur",
       "type": "kg",
-      "harga": "50000",
-      "stock": "100",
+      "harga": 50000,
+      "stock": 100,
       "id": 1
     },
     {
       "nama_barang": "urea",
       "kategori": "pupuk",
       "type": "kg",
-      "harga": "8000",
-      "stock": "1000",
+      "harga": 8000,
+      "stock": 1000,
       "id": 2
     }
   ]

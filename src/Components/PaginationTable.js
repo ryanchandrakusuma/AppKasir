@@ -6,8 +6,6 @@ import { GlobalFilter } from './GlobalFilter';
 import Popup from './Popup';
 
 export const PaginationTable = () => {
-    let namaBarang;
-    let hargaBarang;
     const [isPending, setIsPending] = useState('false');
     const [jumlahBarang, setJumlahBarang] = useState(1);
     const [satuanBarang, setSatuanBarang] = useState('buah');
@@ -17,12 +15,12 @@ export const PaginationTable = () => {
     const [passValue, setValue] = useState([]);
     const columns = useMemo (() => COLUMNS, [])
     const [nama_barang, setNamaBarang] = useState();
-    const [stock, setStock] = useState();
-    const [harga, setHarga] = useState();
+    const [stock, setStock] = useState(0);
+    const [harga, setHarga] = useState(0);
     const [kategori, setKategori] = useState();
     const [type, setType] = useState();
     const handleSubmit = (e) => {
-    // e.preventDefault();
+
     const barang = {nama_barang,kategori,type,harga,stock}
     setIsPending(true);
     fetch('http://localhost:8001/barangs',{
@@ -32,10 +30,8 @@ export const PaginationTable = () => {
     }).then(()=>{
       console.log('barang masuk');
       setIsPending('false');
-      // history.push('/');
     })
   }
-//   const {data} = useFetch('http://localhost:8001/barangs')
 
     const fetchData = async () => {
         return await fetch('http://localhost:8001/barangs')
@@ -48,11 +44,16 @@ export const PaginationTable = () => {
     }
 
     const handleSubmitInsert = (e) => {
-        setButtonPopup(false);
-        namaBarang = passValue.namaBarang;
-        hargaBarang = passValue.hargaBarang * jumlahBarang;
+        let idBarang;
+        let namaBarang;
+        let hargaBarang;
 
-        const barang = {namaBarang, jumlahBarang, satuanBarang, hargaBarang}
+        setButtonPopup(false);
+        idBarang = passValue.id;
+        namaBarang = passValue.nama_barang;
+        hargaBarang = passValue.harga;
+
+        const barang = {idBarang, namaBarang, jumlahBarang, satuanBarang, hargaBarang}
         setIsPending(true);
         fetch('http://localhost:8000/checkout',{
             method: 'POST',

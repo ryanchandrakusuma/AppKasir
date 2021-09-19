@@ -44,6 +44,9 @@ export const CHECKCOLUMNS =
                 accessor: 'id'
             },
             {
+                accessor: 'idBarang'
+            },
+            {
                 accessor: 'namaBarang'
             },
             {
