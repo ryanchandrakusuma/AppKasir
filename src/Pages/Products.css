@@ -1,0 +1,18 @@
+.wrapper
+{
+    display:flex;   
+    width: 100%;
+}
+
+.left
+{
+    margin-right:2rem;
+    margin-left:2rem;
+    width:50%;
+}
+
+.right
+{
+    margin-right:2rem;
+    width: 50%;
+}
