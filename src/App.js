@@ -4,7 +4,7 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Reports from './Pages/Reports';
-import Products from './Pages/Products';
+import Manage from './Pages/Manage';
 import Team from './Pages/Team';
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
       <Navbar />
       <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/manage' exact component={Manage} />
           <Route path='/reports' component={Reports} />
-          <Route path='/products' component={Products} />
           <Route path='/team' component={Team} />
       </Switch>
     </Router>
