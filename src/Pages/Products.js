@@ -1,6 +1,6 @@
 import React from 'react';
 import Checkout from '../Components/Checkout';
-import { PaginationTable } from '../Components/PaginationTable';
+import { ListBarang } from '../Components/ListBarang';
 import './Products.css';
 
 const Products = () => {
@@ -9,7 +9,7 @@ const Products = () => {
     <div className = "wrapper">
       <div className = "left">
         <div className = "top-filter"></div>
-        <PaginationTable />
+        <ListBarang />
       </div>
       <div className = "right">
         <div className = "right-wrapper">
