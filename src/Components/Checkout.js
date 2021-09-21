@@ -8,11 +8,13 @@ import Popup from './Popup';
 function Checkout() {
   let totalHarga = 0;
   const [checkoutList, setCheckoutList] = useState([]);
+  const [barangList, setBarangList] = useState([]);
   const [buttonPopupEdit, setButtonPopupEdit] = useState(false);
   const [passValue, setValue] = useState([]);
   const [jumlahBarang, setJumlahBarang] = useState(0);
   const [satuanBarang, setSatuanBarang] = useState('buah');
   const data = checkoutList;
+  const dataBarang = barangList;
   const columns = useMemo (() => CHECKCOLUMNS, [])
 
   const fetchData = async () => {
@@ -20,6 +22,14 @@ function Checkout() {
       .then(response => response.json())
       .then(data => {
         setCheckoutList(data) 
+      });
+  }
+
+  const fetchDataBarang = async () => {
+    return await fetch('http://localhost:8001/barangs')
+      .then(response => response.json())
+      .then(data => {
+        setBarangList(data) 
       });
   }
 
@@ -37,6 +47,25 @@ function Checkout() {
       console.log('Hapus berhasil');
       window.location.reload();
     });
+  }
+
+  const finalize = () => {
+    const uniqueIds = [];
+    data.map(dt => {
+      if (uniqueIds.indexOf(dt.idBarang) === -1) {
+        uniqueIds.push(dt.idBarang)
+      }
+    });
+    let targetBarang = [];
+    uniqueIds.map(ids => {
+      targetBarang.push(dataBarang.find(({id}) => id === ids));
+    });
+    
+    data.map(dt => {
+      targetBarang.find((({ id }) => id == dt.idBarang )).stock -= dt.jumlahBarang
+    });
+
+    console.log(targetBarang);
   }
 
   const handleSubmitEdit = (id) => {
@@ -59,7 +88,10 @@ function Checkout() {
     })
   }
 
-  useEffect( () => {fetchData()},[]);
+  useEffect( () => {
+    fetchData();
+    fetchDataBarang();
+  },[]);
 
   const {
     getTableProps,
@@ -117,7 +149,7 @@ function Checkout() {
 
           <br></br>
           <h1>Tax : Rp. 0</h1>
-          <button className="checkoutButt">Total Belanja : {totalHarga}</button>
+          <button className="checkoutButt" onClick={() => finalize()}>Total Belanja : {totalHarga}</button>
           {/* <button class="clearButt" onClick={() => deleteDataAll()}>Clear</button> */}
         </div>
     </div>
