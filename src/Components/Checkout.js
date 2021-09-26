@@ -1,12 +1,13 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import './Checkout.css';
 import { CHECKCOLUMNS } from './columns';
+import { format } from 'date-fns';
 import './table.css';
 import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } from 'react-table';
 import Popup from './Popup';
 
 function Checkout() {
-  let totalHarga = 0;
+  var totalHarga = 0;
   const [checkoutList, setCheckoutList] = useState([]);
   const [barangList, setBarangList] = useState([]);
   const [buttonPopupEdit, setButtonPopupEdit] = useState(false);
@@ -34,7 +35,6 @@ function Checkout() {
   }
 
   function editData(value) {
-    console.log(value);
     setJumlahBarang(value.jumlahBarang);
     setValue(value);
     setButtonPopupEdit(true);
@@ -50,22 +50,39 @@ function Checkout() {
   }
 
   const finalize = () => {
-    const uniqueIds = [];
-    data.map(dt => {
+    let uniqueIds = [];
+    data.forEach(dt => {
       if (uniqueIds.indexOf(dt.idBarang) === -1) {
         uniqueIds.push(dt.idBarang)
       }
     });
     let targetBarang = [];
-    uniqueIds.map(ids => {
+    uniqueIds.forEach(ids => {
       targetBarang.push(dataBarang.find(({id}) => id === ids));
     });
     
-    data.map(dt => {
-      targetBarang.find((({ id }) => id == dt.idBarang )).stock -= dt.jumlahBarang
+    data.forEach(dt => {
+      targetBarang.find((({ id }) => id === dt.idBarang )).stock -= dt.jumlahBarang
     });
 
     console.log(targetBarang);
+
+    let tglTransaksi = format(new Date(), 'yyyy/MM/dd kk:mm:ss');
+    const isi = {isiTransaksi: data, tglTransaksi}
+    fetch('http://localhost:8002/history',{
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(isi)
+    }).then(()=>{
+        setTimeout(() => window.location.reload(), 600 * (data.length + 2));
+        let counter = 1;
+        data.forEach(dt => {
+          setTimeout(() => fetch('http://localhost:8000/checkout/' + dt.id, {
+            method: 'DELETE'
+          }), 600 * counter);
+          counter++;
+        });
+    })
   }
 
   const handleSubmitEdit = (id) => {

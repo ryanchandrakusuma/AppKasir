@@ -7,7 +7,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "aphrodite": "^2.4.0",
+    "axios": "^0.21.4",
     "date-fns": "^2.23.0",
+    "mysql": "^2.18.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -22,8 +24,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server-barang": "npx json-server --watch data/databarang.json --port 8000",
-    "server-checkout": "npx json-server --watch data/barang.json --port 8001"
+    "server-checkout": "npx json-server --watch data/checkout.json --port 8000",
+    "server-barang": "npx json-server --watch data/barang.json --port 8001",
+    "server-history": "npx json-server --watch data/history.json --port 8002"
   },
   "eslintConfig": {
     "extends": [

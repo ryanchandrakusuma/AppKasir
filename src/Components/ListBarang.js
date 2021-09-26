@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import Axios from 'axios';
 import { useTable, useGlobalFilter, useSortBy, usePagination, useRowSelect } from 'react-table';
 import { COLUMNS } from './columns';
 import './table.css';
@@ -54,16 +55,21 @@ export const ListBarang = () => {
         hargaBarang = passValue.harga;
 
         const barang = {idBarang, namaBarang, jumlahBarang, satuanBarang, hargaBarang}
-        setIsPending(true);
-        fetch('http://localhost:8000/checkout',{
-            method: 'POST',
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(barang)
-        }).then(()=>{
+
+        Axios.post("http://localhost:3001/api/insert", {idBarang, namaBarang, jumlahBarang, satuanBarang, hargaBarang}).then(()=>{
             console.log('Tambah berhasil');
-            setIsPending('false');
-            window.location.reload();
         })
+
+        // setIsPending(true);
+        // fetch('http://localhost:8000/checkout',{
+        //     method: 'POST',
+        //     headers: { "Content-type": "application/json" },
+        //     body: JSON.stringify(barang)
+        // }).then(()=>{
+        //     console.log('Tambah berhasil');
+        //     setIsPending('false');
+        //     window.location.reload();
+        // })
     }
       
     useEffect( () => {fetchData()},[]);
