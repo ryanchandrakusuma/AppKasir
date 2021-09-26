@@ -56,7 +56,7 @@ export const ListBarang = () => {
 
         const barang = {idBarang, namaBarang, jumlahBarang, satuanBarang, hargaBarang}
 
-        Axios.post("http://localhost:3001/api/insert", {idBarang, namaBarang, jumlahBarang, satuanBarang, hargaBarang}).then(()=>{
+        Axios.post("http://localhost:3001/api/insert", {barang}).then(()=>{
             console.log('Tambah berhasil');
         })
 
