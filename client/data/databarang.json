@@ -1,0 +1,36 @@
+{
+  "checkout": [
+    {
+      "idBarang": 1,
+      "namaBarang": "cabe",
+      "jumlahBarang": "3",
+      "satuanBarang": "buah",
+      "hargaBarang": 50000,
+      "id": 1
+    },
+    {
+      "idBarang": 2,
+      "namaBarang": "urea",
+      "jumlahBarang": "4",
+      "satuanBarang": "buah",
+      "hargaBarang": 8000,
+      "id": 2
+    },
+    {
+      "idBarang": 2,
+      "namaBarang": "urea",
+      "jumlahBarang": "2",
+      "satuanBarang": "buah",
+      "hargaBarang": 8000,
+      "id": 3
+    },
+    {
+      "idBarang": 2,
+      "namaBarang": "urea",
+      "jumlahBarang": 1,
+      "satuanBarang": "kg",
+      "hargaBarang": 8000,
+      "id": 4
+    }
+  ]
+}

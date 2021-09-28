@@ -1,0 +1,3 @@
+ambil list barang
+
+SELECT a.id, a.nama_barang, a.kategori, c.nama_satuan, b.harga, b.stok FROM barang AS a INNER JOIN satuanbarang AS b ON a.id_satuanbarang = b.id INNER JOIN satuan AS c ON b.id_satuan = c.id
